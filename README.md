@@ -1,7 +1,7 @@
 
 ## API Link:
 
-https://www.bestbuy.com/identity/signin?token=tid%3Aee8228fc-8402-11ea-9c3d-005056ae87ac
+https://developer.ebay.com/products/developer
 
 ## Problem statement:
 
