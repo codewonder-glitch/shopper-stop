@@ -1,3 +1,30 @@
+
+## API Link:
+
+https://www.bestbuy.com/identity/signin?token=tid%3Aee8228fc-8402-11ea-9c3d-005056ae87ac
+
+## Problem statement:
+
+An app that enhance online shopping
+
+## Stateful Component:
+
+Products,Login and Registeration page.
+
+## Stateless Component:
+Nav bar
+Cart,
+Checkout
+
+## Wireframe
+
+![wireframe](src/wireframe/Shopper'sStop-Wireframe.png
+)
+
+Target users:
+
+All those people who does online shopping
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
