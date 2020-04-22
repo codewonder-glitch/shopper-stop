@@ -9,7 +9,7 @@ An app that enhance online shopping
 
 ## Stateful Component:
 
-Fetching Products,Login and Registeration page.
+Fetching Products
 
 ## Stateless Component:
 Nav bar,
