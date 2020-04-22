@@ -9,14 +9,16 @@ An app that enhance online shopping
 
 ## Stateful Component:
 
-Fetching Products
+Home page,Fetching Product Information
 
 ## Stateless Component:
-Nav bar,
-Rendering Products,
-Cart,
-Checkout,
-Shipping Instruction
+
+Landing Page,
+Nav bar(React router),
+Rendering Home page
+Rendering Product Information,
+Product not found
+
 
 ## Wireframe
 
