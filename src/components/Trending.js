@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-
+import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
 import logo from './../Assets/logo.png'
 import './Trending.scss'
+import imgs from '../Image'
 
 export default class Trending extends Component{
 constructor(props){
@@ -10,9 +11,12 @@ super(props)
 this.state={
 
     vintagedata:[],
-    Renderdata:[]
+    Renderdata:[],
+    searchkey:[]
 }
 }
+
+
 
 findResults(){
 
@@ -40,8 +44,15 @@ console.log("in filter"+response.data);
     });
 }
 
-componentDidMount(){
-this.findResults();
+getdata = (e)=>{
+e.preventDefault()
+this.setState({searchkey:e.target.value})
+}
+
+getdatasubmit=(e)=>{
+e.preventDefault()
+    console.log(imgs[0])
+
     axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         "method": "GET",
         "headers": {
@@ -54,10 +65,14 @@ this.findResults();
         console.log(response.data.results);
         this.setState({vintagedata:response.data.results})
 
-        const jeepAutos = response.data.results.filter( (auto) => auto.title.includes("Ring"))
-        console.log(jeepAutos);
-        
-        let elements=this.state.vintagedata.map(vintage=>{
+        const filtereddata = response.data.results.filter( (auto) => auto.title.includes(this.state.searchkey))
+        console.log(filtereddata);
+        Object.keys(filtereddata).map((key, i) => (
+            console.log(key)
+          ))
+        var i=0;
+        let elements=filtereddata.map(vintage=>{
+            i++;
            
             // var arr=vintage.url.split(',')
             // for(let i=0;i<arr.length;i++)
@@ -65,10 +80,18 @@ this.findResults();
 
             // }
             return(
+<div>
+                <div className="linkdiv">
+                    <Link to="/info">
+                    <h3>{vintage.title}</h3>
+                     <img src={imgs[i]}/>
+                     </Link>
 
-                <div>
-<h3>{vintage.title}</h3>
-<a href={vintage.url} >Link</a>
+<Route exact path="/info">
+<a href={vintage.url} >Link</a></Route>
+
+</div>
+<br />
 </div>
 )
  })
@@ -80,19 +103,27 @@ this.findResults();
     
 }
 
+
     render(){
 return(
 
 <div>
     <div id="navbar">
     <img id="logo" src={logo}/>
-    <input id="searchbar" type="text" placeholder="Search for products"/>
+    <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
+    <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
     </div>
+   <Router>
+    
     {this.state.Renderdata}
+    </Router>
 </div>
 
 
 )
 
     }
+}
+Productinfo=()=>{
+
 }
