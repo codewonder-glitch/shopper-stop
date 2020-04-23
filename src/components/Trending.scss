@@ -31,10 +31,21 @@ font-size:x-large;
 border : 3px solid cornflowerblue;
     height: 350px;
     width:350px;
+    position: relative;
+    left:150px;
 img{
 
     height:200px;
     width:250px;
+}
+.rendercomp{
+    height: 350px;
+    width:550px;
+    position: fixed;
+    left:400px;
+    top:150px;
+    border : 3px solid cornflowerblue;
+    right:450px;
 }
 
 }
