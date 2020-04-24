@@ -67,13 +67,7 @@ if ((filtereddata.length>0)){
         elements=filtereddata.map((vintage,key)=>{
           
             console.log(key);
-            elem=<div>
-            <h2>Description</h2>
-            <p>{vintage.description.substring(1,250)}</p>
-            <h2>Price</h2>
-            <p>{vintage.price}</p> 
-            <h2>For more details</h2>     
-            <a href={vintage.url} >Click here</a></div>
+            
          
             return(
 
@@ -87,9 +81,19 @@ if ((filtereddata.length>0)){
 
 )
  })
- this.setState({productinfo:elem})
-        this.setState({Renderdata:elements})
+ this.setState({Renderdata:elements})
+
+
+ elem=filtereddata.map((vintage,key)=>{
+    return(<div>
+    <h2>Description</h2>
+    <p>{vintage.description.substring(1,250)}</p>
+    <h2>Price</h2>
+    <p>{vintage.price}</p> 
+    <h2>For more details</h2>     
+    <a href={vintage.url} >Click here</a></div>)})
         
+        this.setState({productinfo:elem})   
     }
 else{elements=<h1>Sorry,results not found</h1>
     this.setState({Renderdata:elements})}})
