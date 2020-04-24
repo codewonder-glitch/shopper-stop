@@ -13,8 +13,10 @@ this.state={
 
     vintagedata:[],
     Renderdata:[],
+    productinfo:[],
     searchkey:[],
-    flag:0
+    flag:0,
+    id:0
     
 }
 }
@@ -25,10 +27,12 @@ componentWillUpdate()
 {
     //this.setState({flag:0})
 }
-setflag=()=>{
-
+setflag=(e)=>{
+e.preventDefault()
     this.setState({flag:1})
-
+    this.setState({id:e.target.name})
+    console.log(this.state.Renderdata)
+    console.log(this.state.productinfo)
 }
 
 getdata = (e)=>{
@@ -46,7 +50,7 @@ e.preventDefault()
         }
     })
     .then(response => {
-        let elements='', itr=0
+        let elements=[], itr=0,elem=[]
         // var searchword='ring';
         console.log(response.data.results);
         this.setState({vintagedata:response.data.results})
@@ -56,39 +60,36 @@ const filtereddata = response.data.results.filter( (vin) => vin.title.includes(t
 if ((filtereddata.length>0)){
     let arr=[];
         console.log(filtereddata);
-      Object.keys(filtereddata).forEach(function(key,i){
-            console.log(key)
-            arr[i]=key
+      Object.keys(filtereddata).forEach(function(keys,i){
+            console.log("key value is",keys)
+            arr[i]=keys
        })
         elements=filtereddata.map((vintage,key)=>{
           
             console.log(key);
-           let elem=<div>
+            elem=<div>
             <h2>Description</h2>
             <p>{vintage.description.substring(1,250)}</p>
             <h2>Price</h2>
             <p>{vintage.price}</p> 
             <h2>For more details</h2>     
             <a href={vintage.url} >Click here</a></div>
+         
             return(
-<div className="topdiv"> 
+
                 <div className="linkdiv">
                   
-                    <h3>{vintage.title}</h3>
-                     <img src={imgs[arr[itr]]}/>
+            <h3>{vintage.title}</h3>
+                     <img name={key} onClick={this.setflag} src={imgs[arr[itr]]}/>
                     
                      {itr++}
+            </div>
 
-
- 
-
-
-</div>
-<br/>
-</div>
 )
  })
+ this.setState({productinfo:elem})
         this.setState({Renderdata:elements})
+        
     }
 else{elements=<h1>Sorry,results not found</h1>
     this.setState({Renderdata:elements})}})
@@ -100,7 +101,8 @@ else{elements=<h1>Sorry,results not found</h1>
     
 }
 
-backbtn=()=>{
+backbtn=(e)=>{
+e.preventDefault()
     this.setState({flag:0}) 
 }
 
@@ -113,20 +115,27 @@ return(
     <div>
     <div id="navbar">
     <img id="logo" src={logo}/>
-    <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
     {this.state.flag===0?
-    <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>:null
-}
+   <div>
+    <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
+<button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
+   
+    </div> :null
+    }
     </div>
     {this.state.flag===0?
-     <div>
-   <Router>
+    <div id="Gridcontainer">
+   {this.state.Renderdata}
    
-    {this.state.Renderdata}
-    </Router>
-    </div>:null
+   
+    </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
     }
-    <button id="backbtn" onclick="backbtn" style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
+  
+    
+   
+
+
+    <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
 </div>
 
 
