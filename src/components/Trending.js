@@ -13,8 +13,22 @@ this.state={
 
     vintagedata:[],
     Renderdata:[],
-    searchkey:[]
+    searchkey:[],
+    flag:0
+    
 }
+}
+
+
+
+componentWillUpdate()
+{
+    //this.setState({flag:0})
+}
+setflag=()=>{
+
+    this.setState({flag:1})
+
 }
 
 getdata = (e)=>{
@@ -32,19 +46,22 @@ e.preventDefault()
         }
     })
     .then(response => {
-        let elements='';
+        let elements='', itr=0
         // var searchword='ring';
         console.log(response.data.results);
         this.setState({vintagedata:response.data.results})
 
    
-const filtereddata = response.data.results.filter( (auto) => auto.title.includes(this.state.searchkey))
+const filtereddata = response.data.results.filter( (vin) => vin.title.includes(this.state.searchkey))
 if ((filtereddata.length>0)){
+    let arr=[];
         console.log(filtereddata);
-        Object.keys(filtereddata).map((key, i) => (
+      Object.keys(filtereddata).forEach(function(key,i){
             console.log(key)
-          ))
+            arr[i]=key
+       })
         elements=filtereddata.map((vintage,key)=>{
+          
             console.log(key);
            let elem=<div>
             <h2>Description</h2>
@@ -56,14 +73,15 @@ if ((filtereddata.length>0)){
             return(
 <div className="topdiv"> 
                 <div className="linkdiv">
-                    <Link to={"/info"+key}>
+                  
                     <h3>{vintage.title}</h3>
-                     <img src={imgs[key]}/>
-                     </Link>
+                     <img src={imgs[arr[itr]]}/>
+                    
+                     {itr++}
 
-<Route exact path={"/info"+key}>
-    <Productinfo info={elem} />
-</Route>
+
+ 
+
 
 </div>
 <br/>
@@ -82,21 +100,36 @@ else{elements=<h1>Sorry,results not found</h1>
     
 }
 
+backbtn=()=>{
+    this.setState({flag:0}) 
+}
+
 
     render(){
 return(
 
-<div>
+    
+
+    <div>
     <div id="navbar">
     <img id="logo" src={logo}/>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
-    <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
+    {this.state.flag===0?
+    <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>:null
+}
     </div>
+    {this.state.flag===0?
+     <div>
    <Router>
-    
+   
     {this.state.Renderdata}
     </Router>
+    </div>:null
+    }
+    <button id="backbtn" onclick="backbtn" style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
 </div>
+
+
 
 
 )

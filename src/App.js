@@ -20,20 +20,7 @@ function App() {
 	console.log(err);
 });
 
-const imgs=
 
-[
-    "./Assets/bamboopin.jpg",
-    "./Assets/Blouse3.jpg",
-    "./Assets/screw3.jpg",
-    "./Assets/Earing11.jpg",
-    "./Assets/girl5.jpg",
-    "./Assets/goldstud10.jpg",
-"./Assets/HairTie.jpg",
-"./Assets/Rng7.jpg",
-"./Assets/Skirt6.jpg"
-
-]
 
   //active Listing
 
