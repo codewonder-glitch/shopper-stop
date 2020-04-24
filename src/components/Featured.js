@@ -5,6 +5,7 @@ import logo from './../Assets/logo.png'
 import './Trending.scss'
 import imgs from '../Image'
 import Productinfo from './Productinfo'
+import Reactrouter from './Router'
 
 export default class Featured extends Component{
 constructor(props){
@@ -23,10 +24,7 @@ this.state={
 
 
 
-componentWillUpdate()
-{
-    //this.setState({flag:0})
-}
+
 setflag=(e)=>{
 e.preventDefault()
     this.setState({flag:1})
@@ -120,6 +118,7 @@ return(
     <div id="navbar">
     <img id="logo" src={logo}/>
     {this.state.flag===0?
+  
    <div>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
 <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
@@ -130,10 +129,11 @@ return(
     {this.state.flag===0?
     <div id="Gridcontainer">
    {this.state.Renderdata}
-   
-   
-    </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
+     </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
     }
+
+{this.state.flag===0?
+   <div><Reactrouter /></div>:null}
   
     
    

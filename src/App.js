@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios'
-import Trending from './components/Trending'
+import Featured from './components/Featured'
 
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
     <div className="App">
       
 
-      <Trending/>
+      <Featured/>
 
     </div>
   );
