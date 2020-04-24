@@ -5,7 +5,10 @@ import logo from './../Assets/logo.png'
 import './Trending.scss'
 import imgs from '../Image'
 import Productinfo from './Productinfo'
-import Reactrouter from './Router'
+import Active from './Active'
+import Trending from './Trending'
+
+
 
 export default class Featured extends Component{
 constructor(props){
@@ -133,7 +136,19 @@ return(
     }
 
 {this.state.flag===0?
-   <div><Reactrouter /></div>:null}
+  <div>
+       
+  <Router>
+
+      <Link to="/Active" onClick={Routingflag}> Active Vintage</Link>
+      <Link to="/Trending">Trending Vintage</Link>
+  <switch>
+      <Route exact path="/Active"><Active /></Route>  
+      <Route exact path="/Trending"><Trending /></Route>  
+      
+    </switch>
+    </Router>
+  </div>:null}
   
     
    

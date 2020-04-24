@@ -4,6 +4,7 @@ import axios from 'axios'
 import Featured from './components/Featured'
 
 
+
 function App() {
   //Featured Listing
   axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
