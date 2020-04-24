@@ -7,6 +7,7 @@ import imgs from '../Image'
 import Productinfo from './Productinfo'
 import Active from './Active'
 import Trending from './Trending'
+import FeaturedRouter from './FeatureRouter'
 
 
 
@@ -20,7 +21,8 @@ this.state={
     productinfo:[],
     searchkey:[],
     flag:0,
-    id:0
+    id:0,
+    hidelist:false
     
 }
 }
@@ -43,6 +45,7 @@ this.setState({searchkey:e.target.value})
 
 getdatasubmit=(e)=>{
 e.preventDefault()
+this.setState({hidelist:true})
     axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         "method": "GET",
         "headers": {
@@ -75,7 +78,7 @@ if ((filtereddata.length>0)){
                 <div className="linkdiv">
                   
             <h3>{vintage.title}</h3>
-                     <img name={key} onClick={this.setflag} src={imgs[arr[itr]]}/>
+                     <img name={key} onClick={this.setflag} src={imgs[arr[itr]] }/>
                     
                      {itr++}
             </div>
@@ -111,6 +114,15 @@ e.preventDefault()
     this.setState({flag:0}) 
 }
 
+Routingflag=(e)=>{
+e.preventDefault()
+}
+
+clicklist=(e)=>{
+    e.preventDefault()
+    {this.setState({hidelist:false})}
+}
+
 
     render(){
 return(
@@ -139,12 +151,19 @@ return(
   <div>
        
   <Router>
-
-      <Link to="/Active" onClick={Routingflag}> Active Vintage</Link>
-      <Link to="/Trending">Trending Vintage</Link>
+      <div className="Route">
+<ul classname="linklist">
+     <li><Link to="/Active" onClick={this.clicklist}> Active Vintage</Link></li>
+     <li> <Link to="/Featured">Featured Vintage</Link></li>
+     <li> <Link to="/Trending">Trending Vintage</Link></li>
+     <li> <Link to="/Trending">Search</Link></li>
+      </ul>
+      </div>
   <switch>
       <Route exact path="/Active"><Active /></Route>  
       <Route exact path="/Trending"><Trending /></Route>  
+      <Route exact path="/Featured"><FeaturedRouter  /></Route>  
+      
       
     </switch>
     </Router>

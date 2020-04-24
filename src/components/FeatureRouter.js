@@ -1,3 +1,4 @@
+
 import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
@@ -6,7 +7,7 @@ import './Trending.scss'
 
 
 
-export default class Active extends Component{
+export default class FeaturedRouter extends Component{
 constructor(props){
 super(props)
 this.state={
@@ -33,16 +34,16 @@ componentDidMount()
 
 getdata=()=>{
 var elements
-    axios.get("https://community-etsy.p.rapidapi.com/listings/active?api_key=68k3wa84d1gbn8t4zzh3yikl", {
-        	"method": "GET",
-        	"headers": {
-        		"x-rapidapi-host": "community-etsy.p.rapidapi.com",
-        		"x-rapidapi-key": "0c50512463mshf6956ddd7cdbe33p13858djsn036596cdcff1"
-        	}
-        })
+axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "community-etsy.p.rapidapi.com",
+            "x-rapidapi-key": "0c50512463mshf6956ddd7cdbe33p13858djsn036596cdcff1"
+        }
+    })
     .then(response => {
         
-        console.log("In active",response.data.results);
+        console.log("In feature ",response.data.results);
         this.setState({vintagedata:response.data.results})
       
         elements=this.state.vintagedata.map((vintage,key)=>{
@@ -60,7 +61,6 @@ var elements
         </div>
         <br />
         </div>
-
 )
  })
  this.setState({Renderdata:elements})
@@ -72,12 +72,10 @@ var elements
 }
     render(){
 return(
-<div>
-    {this.props.hide===false?
 <div id="Gridcontainer">
     {this.state.Renderdata}
-</div>:null}
-</div>  
+</div>
+    
 
    
 
