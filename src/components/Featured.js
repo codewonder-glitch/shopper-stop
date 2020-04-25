@@ -2,10 +2,9 @@ import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
 import logo from './../Assets/logo.png'
-import './Trending.scss'
+import './Style/Trending.scss'
 import imgs from '../Image'
 import Productinfo from './Productinfo'
-
 import Trending from './Trending'
 import FeaturedRouter from './FeatureRender'
 import Active from './Active'
@@ -31,8 +30,6 @@ this.state={
 }
 
 
-
-
 setflag=(e)=>{
 e.preventDefault()
     this.setState({flag:1})
@@ -44,17 +41,12 @@ e.preventDefault()
 getdata = (e)=>{
 e.preventDefault()
 this.setState({Executeonce:true})
-
 this.setState({searchkey:e.target.value})
 }
 
-
-
 getdatasubmit=(e)=>{
 e.preventDefault()
-
 this.setState({submitbtn:true})
-
     axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         "method": "GET",
         "headers": {
@@ -69,27 +61,34 @@ this.setState({submitbtn:true})
         this.setState({vintagedata:response.data.results})
 
    
-const filtereddata = response.data.results.filter( (vin) => vin.title.includes(this.state.searchkey))
-if ((filtereddata.length>0)){
-    let arr=[];
+    const filtereddata = response.data.results.filter( (vin) => vin.title.includes(this.state.searchkey))
+    if ((filtereddata.length>0)){
+    var arr=[];
         console.log(filtereddata);
-      Object.keys(filtereddata).forEach(function(keys,i){
-            console.log("key value is",keys)
-            arr[i]=keys
-       })
-        elements=filtereddata.map((vintage,key)=>{
-          
-            console.log(key);
-            
-         
-            return(
+    //   Object.keys(filtereddata).map((keys,i)=>{
+    //         console.log("key value is",keys)
+    //         arr.push(keys)
+    //    })
+    // for (let [key, value] of Object.entries(filtereddata)) {
+    //     console.log(`${key}: ${value}`);
+    //     console.log("key value is",key)
+    //         arr.push(key)
+    //   }
+    function isCherries(fruit) { 
+        return fruit.key === this.state.vintagedata.user_id;
+      }
+      
+      console.log(imgs.find(isCherries)); 
+        var keys = Object.keys(filtereddata);
+        console.log("key value is",keys)
+        arr.push(0)
+        elements=filtereddata.map((vintage,key)=>{    
+        return(
 
-                <div className="linkdiv">
-                  
+            <div className="linkdiv">
             <h3>{vintage.title}</h3>
-                     <img name={key} onClick={this.setflag} src={imgs[arr[itr]] }/>
-                    
-                     {itr++}
+            <img name={key} onClick={this.setflag} src={imgs[arr[itr]] }/>
+            {itr++}
             </div>
 
 )
@@ -105,11 +104,10 @@ if ((filtereddata.length>0)){
     <p>{vintage.price}</p> 
     <h2>For more details</h2>     
     <a href={vintage.url} >Click here</a></div>)})
-        
-        this.setState({productinfo:elem})   
+    this.setState({productinfo:elem})   
       
     }
-else{elements=<h1>Sorry,results not found</h1>
+    else{elements=<h1>Sorry,results not found</h1>
     this.setState({Renderdata:elements})
 
 }}
@@ -129,38 +127,31 @@ e.preventDefault()
     this.setState({submitbtn:false}) 
 }
 
-Routingflag=(e)=>{
-e.preventDefault()
-}
+    Routingflag=(e)=>{
+    e.preventDefault()
+    }
 
-handleChangePage=(e)=>{
+    handleChangePage=(e)=>{
     e.preventDefault()
     if(this.state.Executeonce===true)
     window.location = 'http://localhost:3001/';
-this.setState({Executeonce:true})
-}
+    this.setState({Executeonce:true})
+    }
 
-handleChildClick=(e)=>{
-console.log("Are u coming here")
+    handleChildClick=(e)=>{
+    console.log("Are u coming here")
     this.setState({child:true})
-}
-
-
+    }
 
     render(){
-return(
-
-    
-
+    return(
     <div>
     <div id="navbar">
     <img id="logo" src={logo}/>
     {this.state.flag===0?
-  
-   <div>
+    <div>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata} onFocus={this.handleChangePage}/>
-<button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
-   
+    <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
     </div> :null
     }
     </div>
@@ -170,41 +161,30 @@ return(
      </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
     }
 
-{ this.state.submitbtn===false?
-  <div>
+    { this.state.submitbtn===false?
+    <div>
        
-  <Router>
-      <div className="Route">
-<ul classname="linklist">
-     <li><Link to="/Active" > Active Vintage</Link></li>
-     <li> <Link to="/Featured">Featured Vintage</Link></li>
-     <li> <Link to="/Trending">Trending Vintage</Link></li>
-    
-      </ul>
-      </div>
-  <switch>
+    <Router>
+    <div className="Route">
+    <ul classname="linklist">
+    <li><Link to="/Active" > Active Vintage</Link></li>
+    <li> <Link to="/Featured">Featured Vintage</Link></li>
+    <li> <Link to="/Trending">Trending Vintage</Link></li>
+    </ul>
+    </div>
+    <switch>
  
-      <Route exact path="/Active"> <Active onClick={this.handleChildClick.bind(this)} /></Route>  
-      <Route exact path="/Trending"><Trending /></Route>  
-      <Route exact path="/Featured"><FeaturedRouter  /></Route>  
+    <Route exact path="/Active"> <Active onClick={this.handleChildClick.bind(this)} /></Route>  
+    <Route exact path="/Trending"><Trending /></Route>  
+    <Route exact path="/Featured"><FeaturedRouter  /></Route>  
       
       
     </switch>
     </Router>
   </div>:null}
-  
-    
-   
-
-
-    <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
+  <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
 </div>
-
-
-
-
 )
-
-    }
+ }
 
 }
