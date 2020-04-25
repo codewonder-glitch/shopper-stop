@@ -20,18 +20,19 @@ import blouse from "./Assets/Blouse2.jpg"
 
 [
     
-  woodmail0,
-  ring1,
-  blouse,
-  screw3,
-  girl4,
-  skirt5,
-  rng6,
-  hairtie7,
-  bamboopin8,
-  lacecolor9,
-  gold10,
-  earing11
+ {6887916: woodmail0},
+ {8050133:ring1},
+ {5232321:blouse},
+ {31351824:screw3},
+ {7768512:girl4},
+ {16818362:skirt5},
+ {13143601:rng6},
+ {5021502:hairtie7},
+ {7360578:bamboopin8},
+ {7360578:lacecolor9},
+ {22569801:gold10},
+ {6299180:earing11}
 
 ]
 export default imgs;
+
