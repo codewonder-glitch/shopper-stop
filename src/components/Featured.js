@@ -5,9 +5,10 @@ import logo from './../Assets/logo.png'
 import './Trending.scss'
 import imgs from '../Image'
 import Productinfo from './Productinfo'
-import Active from './Active'
+
 import Trending from './Trending'
-import FeaturedRouter from './FeatureRouter'
+import FeaturedRouter from './FeatureRender'
+import Active from './Active'
 
 
 
@@ -21,8 +22,10 @@ this.state={
     productinfo:[],
     searchkey:[],
     flag:0,
+    submitbtn:false,
     id:0,
-    hidelist:false
+    Executeonce:false,
+    child:false
     
 }
 }
@@ -40,12 +43,18 @@ e.preventDefault()
 
 getdata = (e)=>{
 e.preventDefault()
+this.setState({Executeonce:true})
+
 this.setState({searchkey:e.target.value})
 }
 
+
+
 getdatasubmit=(e)=>{
 e.preventDefault()
-this.setState({hidelist:true})
+
+this.setState({submitbtn:true})
+
     axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         "method": "GET",
         "headers": {
@@ -98,11 +107,16 @@ if ((filtereddata.length>0)){
     <a href={vintage.url} >Click here</a></div>)})
         
         this.setState({productinfo:elem})   
+      
     }
 else{elements=<h1>Sorry,results not found</h1>
-    this.setState({Renderdata:elements})}})
-    
+    this.setState({Renderdata:elements})
 
+}}
+
+    )
+    
+    
     .catch(err => {
         console.log(err);
     });
@@ -112,16 +126,25 @@ else{elements=<h1>Sorry,results not found</h1>
 backbtn=(e)=>{
 e.preventDefault()
     this.setState({flag:0}) 
+    this.setState({submitbtn:false}) 
 }
 
 Routingflag=(e)=>{
 e.preventDefault()
 }
 
-clicklist=(e)=>{
+handleChangePage=(e)=>{
     e.preventDefault()
-    {this.setState({hidelist:false})}
+    if(this.state.Executeonce===true)
+    window.location = 'http://localhost:3001/';
+this.setState({Executeonce:true})
 }
+
+handleChildClick=(e)=>{
+console.log("Are u coming here")
+    this.setState({child:true})
+}
+
 
 
     render(){
@@ -135,32 +158,33 @@ return(
     {this.state.flag===0?
   
    <div>
-    <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata}/>
+    <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata} onFocus={this.handleChangePage}/>
 <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
    
     </div> :null
     }
     </div>
-    {this.state.flag===0?
+    {this.state.flag===0 || this.state.child===false?
     <div id="Gridcontainer">
    {this.state.Renderdata}
      </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
     }
 
-{this.state.flag===0?
+{ this.state.submitbtn===false?
   <div>
        
   <Router>
       <div className="Route">
 <ul classname="linklist">
-     <li><Link to="/Active" onClick={this.clicklist}> Active Vintage</Link></li>
+     <li><Link to="/Active" > Active Vintage</Link></li>
      <li> <Link to="/Featured">Featured Vintage</Link></li>
      <li> <Link to="/Trending">Trending Vintage</Link></li>
-     <li> <Link to="/Trending">Search</Link></li>
+    
       </ul>
       </div>
   <switch>
-      <Route exact path="/Active"><Active /></Route>  
+ 
+      <Route exact path="/Active"> <Active onClick={this.handleChildClick.bind(this)} /></Route>  
       <Route exact path="/Trending"><Trending /></Route>  
       <Route exact path="/Featured"><FeaturedRouter  /></Route>  
       

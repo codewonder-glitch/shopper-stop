@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
 import './Trending.scss'
+import Activerender from './Activerender'
 
 
 
@@ -16,7 +17,8 @@ this.state={
     productinfo:[],
     
     flag:0,
-    id:0
+    id:0,
+    ExecuteOnce:false
     
 }
 }
@@ -25,13 +27,20 @@ this.state={
 
 componentDidMount()
 {
+    
     this.getdata()
+    
 }
 
 
 
 
 getdata=()=>{
+    
+    // if(this.state.ExecuteOnce===false)
+    //     window.location='http://localhost:3001/Active'
+    //     this.setState({ExecuteOnce:true})
+    
 var elements
     axios.get("https://community-etsy.p.rapidapi.com/listings/active?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         	"method": "GET",
@@ -73,10 +82,10 @@ var elements
     render(){
 return(
 <div>
-    {this.props.hide===false?
-<div id="Gridcontainer">
-    {this.state.Renderdata}
-</div>:null}
+   
+
+  <Activerender info={this.state.Renderdata} />
+
 </div>  
 
    
