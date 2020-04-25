@@ -1,10 +1,7 @@
 import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
-import './Trending.scss'
-
-
-
+import './Style/Trending.scss'
 
 export default class Trending extends Component{
 constructor(props){
@@ -20,16 +17,10 @@ this.state={
     
 }
 }
-
-
-
 componentDidMount()
 {
     this.getdata()
 }
-
-
-
 
 getdata=()=>{
 var elements
@@ -48,21 +39,22 @@ axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key=68k3w
         elements=this.state.vintagedata.map((vintage,key)=>{
           
            return(
-<div>
+<       div>
         <div className="linkdiv">
         
         <h2>Title</h2>
-    <p>{vintage.title}</p>
-    <h2>Price</h2>
-    <p>{vintage.price}</p> 
-    <h2>For more details</h2>     
-    <a href={vintage.url} >Click here</a>
+        <p>{vintage.title}</p>
+        <h2>Price</h2>
+        <p>{vintage.price}</p> 
+        <h2>For more details</h2>     
+        <a href={vintage.url} >Click here</a>
         </div>
         <br />
         </div>
 )
  })
- this.setState({Renderdata:elements})
+
+    this.setState({Renderdata:elements})
     })
     .catch(err => {
         console.log(err);
