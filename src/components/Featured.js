@@ -65,7 +65,7 @@ this.setState({submitbtn:true})
     if ((filtereddata.length>0)){
     var arr=[];
         console.log(filtereddata);
-    //   Object.keys(filtereddata).map((keys,i)=>{
+    //   Object.keys(imgs).map((keys,i)=>{
     //         console.log("key value is",keys)
     //         arr.push(keys)
     //    })
@@ -74,21 +74,24 @@ this.setState({submitbtn:true})
     //     console.log("key value is",key)
     //         arr.push(key)
     //   }
-    function isCherries(fruit) { 
-        return fruit.key === this.state.vintagedata.user_id;
-      }
+
+   filtereddata.map((vintage,key)=>{
+   imgs.map((img,i)=>{
+                console.log("key value is",img.name)
+                if(vintage.user_id==img.name)
+                arr.push(img.image)
+           })
+        }
+        
+   )   
       
-      console.log(imgs.find(isCherries)); 
-        var keys = Object.keys(filtereddata);
-        console.log("key value is",keys)
-        arr.push(0)
         elements=filtereddata.map((vintage,key)=>{    
         return(
 
             <div className="linkdiv">
             <h3>{vintage.title}</h3>
-            <img name={key} onClick={this.setflag} src={imgs[arr[itr]] }/>
-            {itr++}
+            <img name={key} onClick={this.setflag} src={arr[key]}/>
+         
             </div>
 
 )
