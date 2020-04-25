@@ -2,10 +2,7 @@
 import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
-import './Trending.scss'
-
-
-
+import './Style/Trending.scss'
 
 export default class FeaturedRouter extends Component{
 constructor(props){
@@ -15,22 +12,16 @@ this.state={
     vintagedata:[],
     Renderdata:[],
     productinfo:[],
-    
     flag:0,
     id:0
     
 }
 }
 
-
-
 componentDidMount()
 {
     this.getdata()
 }
-
-
-
 
 getdata=()=>{
 var elements
@@ -42,25 +33,23 @@ axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/ho
         }
     })
     .then(response => {
-        
         console.log("In feature ",response.data.results);
         this.setState({vintagedata:response.data.results})
-      
         elements=this.state.vintagedata.map((vintage,key)=>{
           
-           return(
-<div>
-        <div className="linkdiv">
+    return(
+    <div>
+    <div className="linkdiv">
         
         <h2>Title</h2>
-    <p>{vintage.title}</p>
-    <h2>Price</h2>
-    <p>{vintage.price}</p> 
-    <h2>For more details</h2>     
-    <a href={vintage.url} >Click here</a>
-        </div>
-        <br />
-        </div>
+        <p>{vintage.title}</p>
+        <h2>Price</h2>
+        <p>{vintage.price}</p> 
+        <h2>For more details</h2>     
+        <a href={vintage.url} >Click here</a>
+    </div>
+     <br />
+     </div>
 )
  })
  this.setState({Renderdata:elements})
@@ -75,14 +64,7 @@ return(
 <div id="Gridcontainer">
     {this.state.Renderdata}
 </div>
-    
-
-   
-
-
-
-
-)
+    )
 
 }
 
