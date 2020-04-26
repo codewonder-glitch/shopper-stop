@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
 import './Style/Trending.scss'
+import MoreCollections from './RouterCollections'
 
 export default class FeaturedRouter extends Component{
 constructor(props){

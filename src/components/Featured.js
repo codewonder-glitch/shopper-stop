@@ -1,14 +1,12 @@
 import React,{Component} from 'react';
-import {  BrowserRouter as Router, Route, Link ,Switch} from "react-router-dom";
+
 import axios from 'axios'
 import logo from './../Assets/logo.png'
 import './Style/Trending.scss'
 import imgs from '../Image'
 import Productinfo from './Productinfo'
-import Trending from './Trending'
-import FeaturedRouter from './FeatureRender'
-import Active from './Active'
 import jewelbox from './../Assets/Pill-Box.gif'
+import MoreCollections from './RouterCollections'
 
 
 
@@ -21,11 +19,12 @@ this.state={
     Renderdata:[],
     productinfo:[],
     searchkey:[],
-    flag:0,
+    showproduct:false,
     submitbtn:false,
     id:0,
-   showhomeimg:true,
-    child:false
+    showhomeimg:true,
+    showcategories:false,
+    btnText:"More Categories"
     
 }
 }
@@ -33,7 +32,7 @@ this.state={
 
 setflag=(e)=>{
 e.preventDefault()
-    this.setState({flag:1})
+    this.setState({showproduct:true})
     this.setState({id:e.target.name})
     
 }
@@ -102,8 +101,9 @@ this.setState({submitbtn:true})
 
  elem=filtereddata.map((vintage,key)=>{
     return(<div>
+
     <h2>Description</h2>
-    <p>{vintage.description.substring(1,250)}</p>
+    <p>{vintage.description.substring(0,250)}</p>
     <h2>Price</h2>
     <p>{vintage.price}</p> 
     <h2>For more details</h2>     
@@ -127,9 +127,25 @@ this.setState({submitbtn:true})
 
 backbtn=(e)=>{
 e.preventDefault()
-    this.setState({flag:0}) 
+    this.setState({showproduct:false}) 
     this.setState({submitbtn:false}) 
 }
+handleCategories=(e)=>{
+    e.preventDefault()
+    if(this.state.btnText=="More Categories")
+{
+        this.setState({showcategories:true}) 
+        this.setState({btnText:"Home"}) 
+        this.setState({showhomeimg:false})
+       
+}else{
+    this.setState({showcategories:false}) 
+   
+    this.setState({btnText:"More Categories"}) 
+}
+        // this.style.value="Home"
+   
+    }
 
     handleChangePage=(e)=>{
     e.preventDefault()
@@ -138,61 +154,39 @@ e.preventDefault()
 //     this.setState({Executeonce:true})
     }
 
-    handleChildClick=(e)=>{
-    console.log("Are u coming here")
-    this.setState({child:true})
-    }
-
     render(){
     return(
         <React.Fragment>
     <div className="mainContainer">
     <div id="navbar">
     <img id="logo" src={logo}/>
-    {this.state.flag===0 &&
+    { (this.state.showcategories===false && this.state.showproduct===false) &&
     <div>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata} onFocus={this.handleChangePage}/>
     <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
     </div> 
     }
+ {  this.state.showproduct===false &&
+<button id="morecategories" type="submit" value="Categories" onClick={this.handleCategories}>{this.state.btnText}</button>}
     </div>
-    {this.state.showhomeimg &&
+    {this.state.showhomeimg===true &&
     <div className="Homepage">
     <h1>Custom Vintage Collections Everyday</h1>
     
-    <img id="logo" src={jewelbox}/>
+    <img id="jewel" src={jewelbox}/>
     </div>}
-    {this.state.flag===0 ?
-    <div id="Gridcontainer">
+    {(this.state.showcategories===false && this.state.showproduct===false )?
+    <div className="Gridcontainer">
    {this.state.Renderdata}
-     </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
-    }
-
+     </div>:null}
+     
+     {(this.state.showproduct===true && this.state.showcategories===false) &&
+     <div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>}
     
-    {/* <div>
-    <Router>
-    <div className="Route">
-    <Link to="/Active" > Active Vintage</Link>
-  <Link to="/Featured">Featured Vintage</Link>
-   <Link to="/Trending">Trending Vintage</Link>
 
-    {/* <ul classname="linklist">
-    <li><Link to="/Active" > Active Vintage</Link></li>
-    <li> <Link to="/Featured">Featured Vintage</Link></li>
-    <li> <Link to="/Trending">Trending Vintage</Link></li>
-    </ul> */}
-    {/* </div>
-    <Switch>
+{this.state.showcategories===true && <MoreCollections />}
  
-    <Route exact path="/Active"> <Active onClick={this.handleChildClick.bind(this)} /></Route>  
-    <Route exact path="/Trending"><Trending /></Route>  
-    <Route exact path="/Featured"><FeaturedRouter  /></Route>  
-      
-      
-    </Switch>
-    </Router> 
-  </div>  */}
-  <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
+  <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.showproduct===true ? 'visible' : 'hidden' }} >Back</button>
 </div>
 </React.Fragment>
 )

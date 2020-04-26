@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import woodmail0 from './Assets/woodmail0.png'
+import woodmail0 from './Assets/woodmail0.jpg'
 import ring1 from './Assets/Ring1.jpg'
 import blouse from "./Assets/Blouse2.jpg"
  import screw3 from   "./Assets/screw3.jpg"
@@ -39,7 +39,7 @@ let imgs=
 [
     
  {name:10779498,
-  image: "woodmail0"
+  image: woodmail0
 
 },
  {name:6887916,image:ring1},
