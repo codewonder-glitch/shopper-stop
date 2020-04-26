@@ -6,7 +6,7 @@ export default function Productinfo(props){
     
 return(
     <div>
-    <div>
+    <div className="renderimg">
     {props.name[props.id]}
     </div>
     <div className="rendercomp">
