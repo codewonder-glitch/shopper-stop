@@ -24,7 +24,7 @@ this.state={
     id:0,
     showhomeimg:true,
     showcategories:false,
-    btnText:"More Categories"
+    btnText:"Categories"
     
 }
 }
@@ -132,7 +132,7 @@ e.preventDefault()
 }
 handleCategories=(e)=>{
     e.preventDefault()
-    if(this.state.btnText=="More Categories")
+    if(this.state.btnText=="Categories")
 {
         this.setState({showcategories:true}) 
         this.setState({btnText:"Home"}) 
@@ -141,7 +141,7 @@ handleCategories=(e)=>{
 }else{
     this.setState({showcategories:false}) 
    
-    this.setState({btnText:"More Categories"}) 
+    this.setState({btnText:"Categories"}) 
 }
         // this.style.value="Home"
    
@@ -167,8 +167,11 @@ handleCategories=(e)=>{
     </div> 
     }
  {  this.state.showproduct===false &&
-<button id="morecategories" type="submit" value="Categories" onClick={this.handleCategories}>{this.state.btnText}</button>}
-    </div>
+ 
+//  <input type="button" id="morecategories" onClick={this.handleCategories} value={this.state.btnText}/>}
+
+ <button id="morecategories" type="submit" value="Categories" onClick={this.handleCategories}>{this.state.btnText}</button> }
+    </div> 
     {this.state.showhomeimg===true &&
     <div className="Homepage">
     <h1>Custom Vintage Collections Everyday</h1>

@@ -4,7 +4,7 @@ import './Style/Trending.scss'
 export default function Activerender(props){
     
 return(
-    <div id=".Gridcontainer-link>
+    <div >
     {props.info}
     </div>
 )

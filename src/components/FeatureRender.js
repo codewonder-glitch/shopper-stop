@@ -42,11 +42,11 @@ axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/ho
     <div>
     <div className="linkdiv">
         
-        <h2>Title</h2>
-        <p>{vintage.title}</p>
-        <h2>Price</h2>
+        <h3>Title</h3>
+        <p>{vintage.title.substring(0,70)}</p>
+        <h3>Price</h3>
         <p>{vintage.price}</p> 
-        <h2>For more details</h2>     
+        <h3>For more details</h3>     
         <a href={vintage.url} >Click here</a>
     </div>
      <br />
@@ -62,7 +62,7 @@ axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/ho
 }
     render(){
 return(
-<div id=".Gridcontainer-link">
+<div className="Gridcontainer-link">
     {this.state.Renderdata}
 </div>
     )

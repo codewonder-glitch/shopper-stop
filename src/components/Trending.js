@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios'
 import './Style/Trending.scss'
 
@@ -42,11 +41,11 @@ axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key=68k3w
 <       div>
         <div className="linkdiv">
         
-        <h2>Title</h2>
+        <p><b>Title</b></p>
         <p>{vintage.title}</p>
-        <h2>Price</h2>
+        <p><b>Price</b></p>
         <p>{vintage.price}</p> 
-        <h2>For more details</h2>     
+        <p><b>For more details</b></p>   
         <a href={vintage.url} >Click here</a>
         </div>
         <br />
@@ -63,7 +62,7 @@ axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key=68k3w
 }
     render(){
 return(
-<div id="Gridcontainer">
+<div className="Gridcontainer-link">
     {this.state.Renderdata}
 </div>
     
