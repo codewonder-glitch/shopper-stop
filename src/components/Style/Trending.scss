@@ -1,5 +1,11 @@
+
+.mainContainer{
+height:100%;
+text-align: center;
+align-items: center;
+    background-color:antiquewhite;
 #navbar{
-background-color: cornflowerblue;
+background-color:#f9545b;
     display:flex;
     justify-content: center;
 
@@ -26,46 +32,74 @@ background-color: cornflowerblue;
     border-radius:75%;
     }
 }
-#Gridcontainer{
-display: grid;
-grid-template-columns: auto auto auto;
-.linkdiv{
-border : 3px solid cornflowerblue;
-    height: 350px;
-    width:350px;
-    position: relative;
-    left:150px;
+.Homepage{
+   
+text-align: center;
+    img{
+
+
+    }
+}
+
+   .renderimg{
+left:50px;
+position: absolute;
+height:750px;
+    width:850px;
 img{
+    
+    height:750px;
+    width:750px;
+}
+   }
 
-    height:200px;
-    width:250px;
-}
-}
-
-}
 
 .rendercomp{
     height: 350px;
-    width:550px;
+    width:400px;
     position: fixed;
-    left:600px;
-    top:210px;
+    top:160px;
     border : 3px solid cornflowerblue;
-    right:450px;
+    right:160px;
 }
+#Gridcontainer{
+    display: grid;
+    grid-template-columns: auto auto auto auto ;
+    // grid-row-gap: 2px;
+    // grid-column-gap: 2px;
+    position: absolute;
+    
+    
+         top:130px;
+         left:50px;
+         width:100%;
+         h4{
+
+            text-align: justify;     
+         }
+
 .linkdiv{
-    border : 3px solid cornflowerblue;
-        height: 350px;
-        width:350px;
+    padding: 1px;
+    // background-color: #9ae1d3;
+    //border : 3px solid cornflowerblue;
+        height: 290px;
+        width:265px;
         position: relative;
-        top:130px;
-        left:150px;
+        text-align: center;
+        // top:130px;
+        // left:150px;
     img{
     
         height:200px;
         width:250px;
+        transition: width 2s,transform 2s;
+    }
+    img:hover{
+        transform: scale(1.5);
+
     }
     }
+}
     #backbtn{
         top:90px;
         position:absolute;
@@ -73,21 +107,24 @@ img{
     }
 
     .Route{
+        display: flex;
+            flex-direction: row;
+justify-content: space-evenly;
 
-        ul{
+      
+            
+    //    list-style-type:none;
+    //     margin: 0px;
+    //     padding: 0px;
+    //     position: absolute;
+    //     top:400px;
 
-       list-style-type:none;
-        margin: 0px;
-        padding: 0px;
-        position: absolute;
-        top:400px;
-
-        li{
+        link{
             padding :10px 10px;
             margin: 0px;
             
                         }
-        }
+     
 
     }
-    
+}
