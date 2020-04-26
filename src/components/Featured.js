@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {  BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {  BrowserRouter as Router, Route, Link ,Switch} from "react-router-dom";
 import axios from 'axios'
 import logo from './../Assets/logo.png'
 import './Style/Trending.scss'
@@ -8,6 +8,7 @@ import Productinfo from './Productinfo'
 import Trending from './Trending'
 import FeaturedRouter from './FeatureRender'
 import Active from './Active'
+import jewelbox from './../Assets/Pill-Box.gif'
 
 
 
@@ -23,7 +24,7 @@ this.state={
     flag:0,
     submitbtn:false,
     id:0,
-    Executeonce:false,
+   showhomeimg:true,
     child:false
     
 }
@@ -34,18 +35,18 @@ setflag=(e)=>{
 e.preventDefault()
     this.setState({flag:1})
     this.setState({id:e.target.name})
-    console.log(this.state.Renderdata)
-    console.log(this.state.productinfo)
+    
 }
 
 getdata = (e)=>{
 e.preventDefault()
-this.setState({Executeonce:true})
+
 this.setState({searchkey:e.target.value})
 }
 
 getdatasubmit=(e)=>{
 e.preventDefault()
+this.setState({showhomeimg:false})
 this.setState({submitbtn:true})
     axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
         "method": "GET",
@@ -84,13 +85,13 @@ this.setState({submitbtn:true})
         }
         
    )   
-      
         elements=filtereddata.map((vintage,key)=>{    
         return(
 
             <div className="linkdiv">
-            <h3>{vintage.title}</h3>
-            <img name={key} onClick={this.setflag} src={arr[key]}/>
+                <img name={key} onClick={this.setflag} src={arr[key]}/>
+            <h4>{vintage.title.substring(0,50)}</h4>
+            
          
             </div>
 
@@ -130,15 +131,11 @@ e.preventDefault()
     this.setState({submitbtn:false}) 
 }
 
-    Routingflag=(e)=>{
-    e.preventDefault()
-    }
-
     handleChangePage=(e)=>{
     e.preventDefault()
-    if(this.state.Executeonce===true)
-    window.location = 'http://localhost:3001/';
-    this.setState({Executeonce:true})
+//    // if(this.state.Executeonce===true)
+//     window.location = 'http://localhost:3001/';
+//     this.setState({Executeonce:true})
     }
 
     handleChildClick=(e)=>{
@@ -148,45 +145,56 @@ e.preventDefault()
 
     render(){
     return(
-    <div>
+        <React.Fragment>
+    <div className="mainContainer">
     <div id="navbar">
     <img id="logo" src={logo}/>
-    {this.state.flag===0?
+    {this.state.flag===0 &&
     <div>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata} onFocus={this.handleChangePage}/>
     <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
-    </div> :null
+    </div> 
     }
     </div>
-    {this.state.flag===0 || this.state.child===false?
+    {this.state.showhomeimg &&
+    <div className="Homepage">
+    <h1>Custom Vintage Collections Everyday</h1>
+    
+    <img id="logo" src={jewelbox}/>
+    </div>}
+    {this.state.flag===0 ?
     <div id="Gridcontainer">
    {this.state.Renderdata}
      </div>:<div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>
     }
 
-    { this.state.submitbtn===false?
-    <div>
-       
+    
+    {/* <div>
     <Router>
     <div className="Route">
-    <ul classname="linklist">
+    <Link to="/Active" > Active Vintage</Link>
+  <Link to="/Featured">Featured Vintage</Link>
+   <Link to="/Trending">Trending Vintage</Link>
+
+    {/* <ul classname="linklist">
     <li><Link to="/Active" > Active Vintage</Link></li>
     <li> <Link to="/Featured">Featured Vintage</Link></li>
     <li> <Link to="/Trending">Trending Vintage</Link></li>
-    </ul>
-    </div>
-    <switch>
+    </ul> */}
+    {/* </div>
+    <Switch>
  
     <Route exact path="/Active"> <Active onClick={this.handleChildClick.bind(this)} /></Route>  
     <Route exact path="/Trending"><Trending /></Route>  
     <Route exact path="/Featured"><FeaturedRouter  /></Route>  
       
       
-    </switch>
-    </Router>
-  </div>:null}
+    </Switch>
+    </Router> 
+  </div>  */}
   <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.flag===1 ? 'visible' : 'hidden' }} >Back</button>
 </div>
+</React.Fragment>
 )
  }
 
