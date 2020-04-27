@@ -5,6 +5,9 @@ import axios from 'axios'
 import './Style/Trending.scss'
 import MoreCollections from './RouterCollections'
 
+const Apikey=process.env.REACT_APP_API_KEY
+
+
 export default class FeaturedRouter extends Component{
 constructor(props){
 super(props)
@@ -24,9 +27,9 @@ componentDidMount()
     this.getdata()
 }
 
-getdata=()=>{
+getdata=async()=>{
 var elements
-axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
+await axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key="+Apikey, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "community-etsy.p.rapidapi.com",

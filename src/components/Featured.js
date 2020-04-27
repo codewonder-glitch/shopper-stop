@@ -8,7 +8,7 @@ import Productinfo from './Productinfo'
 import jewelbox from './../Assets/Pill-Box.gif'
 import MoreCollections from './RouterCollections'
 
-
+const Apikey=process.env.REACT_APP_API_KEY
 
 export default class Featured extends Component{
 constructor(props){
@@ -43,11 +43,11 @@ e.preventDefault()
 this.setState({searchkey:e.target.value})
 }
 
-getdatasubmit=(e)=>{
+getdatasubmit=async(e)=>{
 e.preventDefault()
 this.setState({showhomeimg:false})
 this.setState({submitbtn:true})
-    axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key=68k3wa84d1gbn8t4zzh3yikl", {
+    await axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key="+Apikey, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "community-etsy.p.rapidapi.com",

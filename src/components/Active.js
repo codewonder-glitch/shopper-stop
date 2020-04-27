@@ -4,6 +4,8 @@ import axios from 'axios'
 import './Style/Trending.scss'
 import Activerender from './Activerender'
 
+const Apikey=process.env.REACT_APP_API_KEY
+
 export default class Active extends Component{
 constructor(props){
 super(props)
@@ -24,14 +26,14 @@ componentDidMount()
     this.getdata()
     
 }
-getdata=()=>{
+ getdata=async()=>{
     
     // if(this.state.ExecuteOnce===false)
     //     window.location='http://localhost:3001/Active'
     //     this.setState({ExecuteOnce:true})
     
 var elements
-    axios.get("https://community-etsy.p.rapidapi.com/listings/active?api_key=68k3wa84d1gbn8t4zzh3yikl", {
+   await axios.get("https://community-etsy.p.rapidapi.com/listings/active?api_key="+Apikey, {
         	"method": "GET",
         	"headers": {
         		"x-rapidapi-host": "community-etsy.p.rapidapi.com",
