@@ -28,10 +28,7 @@ componentDidMount()
 }
  getdata=async()=>{
     
-    // if(this.state.ExecuteOnce===false)
-    //     window.location='http://localhost:3001/Active'
-    //     this.setState({ExecuteOnce:true})
-    
+    // Fetching data from the server
 var elements
    await axios.get("https://community-etsy.p.rapidapi.com/listings/active?api_key="+Apikey, {
         	"method": "GET",
@@ -42,21 +39,19 @@ var elements
     })
     .then(response => {
         
-        console.log("In active",response.data.results);
         this.setState({vintagedata:response.data.results})
-      
+      // Fetching array element one by one assigning required values to state variable 
         elements=this.state.vintagedata.map((vintage,key)=>{
           
            return(
-<       div>
+        <div>
         <div className="linkdiv">
-        
         <h3>Title</h3>
-    <p className="title">{vintage.title.substring(0,70)}</p>
-    <h3>Price</h3>
-    <p>{vintage.price}</p> 
-    <h3>For more details</h3>     
-    <a href={vintage.url} >Click here</a>
+        <p className="title">{vintage.title.substring(0,70)}</p>
+        <h3>Price</h3>
+        <p>{vintage.price}</p> 
+        <h3>For more details</h3>     
+        <a href={vintage.url} >Click here</a>
         </div>
         <br />
         </div>
@@ -71,10 +66,11 @@ var elements
     
 }
     render(){
-return(
-<div>
-   <Activerender info={this.state.Renderdata} />
-</div>  
+        //component Activerender is invoked
+        return(
+        <div>
+        <Activerender info={this.state.Renderdata} />
+        </div>  
 
    )
 

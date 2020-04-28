@@ -9,31 +9,15 @@ import blouse from "./Assets/Blouse2.jpg"
  import hairtie7 from"./Assets/HairTie7.jpg"
  import bamboopin8 from "./Assets/bamboopin8.jpg"
  import lacecolor9 from './Assets/Lacecolor9.jpg'
- 
-   import gold10 from "./Assets/goldstud10.jpg"
-   import earing11 from  "./Assets/Earing11.jpg"
+ import gold10 from "./Assets/goldstud10.jpg"
+  import earing11 from  "./Assets/Earing11.jpg"
   
   
   
   
-//  let imgs=
+// Images are copied from the website and used here since results 
+//doesn't contain images
 
-// [
-    
-//  {10779498: woodmail0},
-//  {6887916:ring1},
-//  {8050133:blouse},
-//  {5232321:screw3},
-//  {31351824:girl4},
-//  {7768512:skirt5},
-//  {16818362:rng6},
-//  {13143601:hairtie7},
-//  {5021502:bamboopin8},
-//  {7360578:lacecolor9},
-//  {22569801:gold10},
-//  {6299180:earing11}
-
-// ]
 let imgs=
 
 [

@@ -42,7 +42,7 @@ e.preventDefault()
 
 this.setState({searchkey:e.target.value})
 }
-
+ // Fetching data from the server
 getdatasubmit=async(e)=>{
 e.preventDefault()
 this.setState({showhomeimg:false})
@@ -56,10 +56,9 @@ this.setState({submitbtn:true})
     })
     .then(response => {
         let elements=[], itr=0,elem=[]
-        // var searchword='ring';
         console.log(response.data.results);
         this.setState({vintagedata:response.data.results})
-
+        // result is searched with the keyword entered
    
     const filtereddata = response.data.results.filter( (vin) => vin.title.includes(this.state.searchkey))
     if ((filtereddata.length>0)){
@@ -75,6 +74,7 @@ this.setState({submitbtn:true})
     //         arr.push(key)
     //   }
 
+    // Fetching array element one by one assigning required values to state variable 
    filtereddata.map((vintage,key)=>{
    imgs.map((img,i)=>{
                 console.log("key value is",img.name)
@@ -84,6 +84,7 @@ this.setState({submitbtn:true})
         }
         
    )   
+   // Assigning Product info 
         elements=filtereddata.map((vintage,key)=>{    
         return(
 
@@ -149,9 +150,7 @@ handleCategories=(e)=>{
 
     handleChangePage=(e)=>{
     e.preventDefault()
-//    // if(this.state.Executeonce===true)
-//     window.location = 'http://localhost:3001/';
-//     this.setState({Executeonce:true})
+
     }
 
     render(){
@@ -160,35 +159,41 @@ handleCategories=(e)=>{
     <div className="mainContainer">
     <div id="navbar">
     <img id="logo" src={logo}/>
+    {/* Did hide the search bar when the image is clicked or more categories button is clicked */}
     { (this.state.showcategories===false && this.state.showproduct===false) &&
     <div>
     <input id="searchbar" type="text" placeholder="Search for products" onChange={this.getdata} onFocus={this.handleChangePage}/>
     <button type="submit" value="search" onClick={this.getdatasubmit}>Search</button>
     </div> 
     }
- {  this.state.showproduct===false &&
- 
-//  <input type="button" id="morecategories" onClick={this.handleCategories} value={this.state.btnText}/>}
 
- <button id="morecategories" type="submit" value="Categories" onClick={this.handleCategories}>{this.state.btnText}</button> }
+    {/* More categories is hidden when product info is displayed */}
+ {  this.state.showproduct===false &&
+    <button id="morecategories" type="submit" value="Categories" onClick={this.handleCategories}>{this.state.btnText}</button> }
     </div> 
+
+    {/* Did Hide the home page when search button is clicked */}
     {this.state.showhomeimg===true &&
     <div className="Homepage">
     <h1>Custom Vintage Collections Everyday</h1>
     
     <img id="jewel" src={jewelbox}/>
     </div>}
+
+    {/* Hiding the products when product info and categories page is rendered */}
     {(this.state.showcategories===false && this.state.showproduct===false )?
     <div className="Gridcontainer">
    {this.state.Renderdata}
      </div>:null}
-     
+     {/* component product info is invoked if the image button is clicked */}
      {(this.state.showproduct===true && this.state.showcategories===false) &&
      <div><Productinfo name={this.state.Renderdata} info={this.state.productinfo} id={this.state.id}/></div>}
     
+    {/* Router page is rendered when categories button is clicked */}
 
 {this.state.showcategories===true && <MoreCollections />}
- 
+
+{/* backbtn is displayed when product info is displayed  */}
   <button id="backbtn" onClick={this.backbtn} style={{visibility: this.state.showproduct===true ? 'visible' : 'hidden' }} >Back</button>
 </div>
 </React.Fragment>

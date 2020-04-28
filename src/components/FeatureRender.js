@@ -26,7 +26,7 @@ componentDidMount()
 {
     this.getdata()
 }
-
+// Fetching data from the server
 getdata=async()=>{
 var elements
 await axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listings/homepage_current?api_key="+Apikey, {
@@ -37,7 +37,7 @@ await axios.get("https://community-etsy.p.rapidapi.com/featured_treasuries/listi
         }
     })
     .then(response => {
-        console.log("In feature ",response.data.results);
+        // Fetching array element one by one assigning required values to state variable
         this.setState({vintagedata:response.data.results})
         elements=this.state.vintagedata.map((vintage,key)=>{
           

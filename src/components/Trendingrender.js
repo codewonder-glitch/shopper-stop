@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './Style/Trending.scss'
 
-export default function Activerender(props){
+export default function Trendingrender(props){
     
 return(
     <div >

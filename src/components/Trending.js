@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios'
 import './Style/Trending.scss'
+import Trendingrender from './Trendingrender'
 
 const Apikey=process.env.REACT_APP_API_KEY
 
@@ -22,7 +23,7 @@ componentDidMount()
 {
     this.getdata()
 }
-
+ // Fetching data from the server
 getdata=async()=>{
 var elements
 await axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key="+Apikey, {
@@ -34,13 +35,13 @@ await axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key
 })
     .then(response => {
         
-        console.log("In trending ",response.data.results);
+       
         this.setState({vintagedata:response.data.results})
-      
+      // Fetching array element one by one assigning required values to state variable 
         elements=this.state.vintagedata.map((vintage,key)=>{
           
            return(
-<       div>
+        <div>
         <div className="linkdiv">
         
         <p><b>Title</b></p>
@@ -63,6 +64,7 @@ await axios.get("https://community-etsy.p.rapidapi.com/listings/trending?api_key
     
 }
     render(){
+        //component Trendingrender is invoked
 return(
 <div className="Gridcontainer-link">
     {this.state.Renderdata}
