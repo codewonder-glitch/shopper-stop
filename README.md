@@ -1,7 +1,7 @@
 
 ## API Link:
 
-https://developer.ebay.com/products/developer
+https://www.etsy.com/developers/
 
 ## Problem statement:
 
